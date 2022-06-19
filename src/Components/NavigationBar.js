@@ -1,8 +1,9 @@
 import React from 'react'
-import { Container, Nav, Navbar } from 'react-bootstrap'
+import { Container, Nav, Navbar, Badge } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
 
-export default function NavigationBar() {
+function NavigationBar(props) {
     return (
         <Navbar bg="dark" variant='dark' expand="lg">
             <Container>
@@ -15,10 +16,16 @@ export default function NavigationBar() {
                         <Nav.Link as={Link} to="/product">Personal Computer</Nav.Link>
                     </Nav>
                     <Nav className="ms-auto">
-                        <Nav.Link as={Link} to="/chart">Cart</Nav.Link>
+                        <Nav.Link as={Link} to="/chart">Cart <Badge pill bg="danger">{props.cartReducer.length}</Badge></Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
     )
 }
+
+const mapStateToProps = state => ({
+    cartReducer: state.cartReducer
+});
+
+export default connect(mapStateToProps)(NavigationBar);
