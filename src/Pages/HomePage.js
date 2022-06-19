@@ -19,7 +19,7 @@ export default function HomePage() {
         <Container>
             <Carousel className='mt-5'>
                 {carouselItem.map((e) => (
-                    <Carousel.Item interval={2000}>
+                    <Carousel.Item interval={2000} key={e.src}>
                         <img
                             className="d-block h-100 w-100"
                             src={"./Images/Carousel/" + e.src}
