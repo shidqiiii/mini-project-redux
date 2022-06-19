@@ -1,10 +1,20 @@
-import { Carousel, Container, Row, Col, Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Carousel, Container } from 'react-bootstrap'
 import React from 'react'
-import '../css/Homepage.css';
-import { carouselItem, cardItem } from "../Components/Homepage/data"
+import '../css/Homepage.css'
+import ProductCard from '../Components/ProductCard';
 
 export default function HomePage() {
+    const carouselItem = [{
+        "src": "carousel1.png",
+        "alt": "First slide"
+    }, {
+        "src": "carousel2.png",
+        "alt": "Second slide"
+    }, {
+        "src": "carousel3.png",
+        "alt": "Third slide"
+    }]
+
     return (
         <Container>
             <Carousel className='mt-5'>
@@ -19,19 +29,7 @@ export default function HomePage() {
                 ))}
             </Carousel>
 
-            <Row xs={1} md={2} lg={4} className="g-4 my-5 text-center">
-                {cardItem.map((e) => (
-                    <Col>
-                        <Card style={{ minHeight: "390px" }} as={Link} to="/product">
-                            <Card.Img variant="top" src={e.image} />
-                            <Card.Body>
-                                <Card.Title>IDR {e.price.toLocaleString("id-ID")}</Card.Title>
-                                <Card.Text>{e.name}</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                ))}
-            </Row>
+            <ProductCard />
         </Container>
     )
 }

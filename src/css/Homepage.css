@@ -1,13 +1,22 @@
-.card {
+.product-card {
   text-decoration: none;
   color: black;
 }
 
-.card:hover {
-  border: 1px solid black;
+.product-card:hover {
+  border: none;
   color: black;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
 }
 
-.card .card-text:hover {
+.product-card .card-text:hover {
   text-decoration: underline;
+}
+
+.product-card .button {
+  display: none;
+}
+
+.product-card:hover .button {
+  display: block;
 }

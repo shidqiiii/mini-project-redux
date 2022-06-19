@@ -6,7 +6,7 @@ export default function NavigationBar() {
     return (
         <Navbar bg="dark" variant='dark' expand="lg">
             <Container>
-                <Navbar.Brand as={Link} to="/">Ipaid!</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/">Estore</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
@@ -15,7 +15,7 @@ export default function NavigationBar() {
                         <Nav.Link as={Link} to="/product">Personal Computer</Nav.Link>
                     </Nav>
                     <Nav className="ms-auto">
-                        <Nav.Link as={Link} to="/chart">Chart</Nav.Link>
+                        <Nav.Link as={Link} to="/chart">Cart</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
