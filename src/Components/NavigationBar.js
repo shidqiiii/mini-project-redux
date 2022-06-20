@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Nav, Navbar, Badge } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
+import { BsCart } from 'react-icons/bs';
 
 function NavigationBar(props) {
     return (
@@ -16,7 +17,7 @@ function NavigationBar(props) {
                         <Nav.Link as={Link} to="/product">Personal Computer</Nav.Link>
                     </Nav>
                     <Nav className="ms-auto">
-                        <Nav.Link as={Link} to="/chart">Cart <Badge pill bg="danger">{props.cartReducer.length}</Badge></Nav.Link>
+                        <Nav.Link as={Link} to="/chart"><BsCart /> Shopping Cart <Badge className='mx-1' bg="danger">{props.cartReducer.length}</Badge></Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

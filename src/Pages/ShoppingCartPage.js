@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react'
 import { Card, Button, Container, Image } from 'react-bootstrap';
+import { BsTrash } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { deleteCart, amountItem } from '../redux/action/cartAction'
@@ -73,7 +74,7 @@ function ShoppingCartPage(props) {
                                     <Button variant='dark' onClick={() => { AmountItem(e.product_id, "add") }}>+</Button>
                                     <Card.Text className='my-auto mx-3'>IDR {e.total_price.toLocaleString("id-ID")}</Card.Text>
                                 </div>
-                                <Button variant='dark' className='ms-auto mb-3' style={{ width: "100px" }} onClick={() => { deleteItem(e.product_id) }}>Hapus</Button>
+                                <Button variant='dark' className='ms-auto mb-3' style={{ width: "50px" }} onClick={() => { deleteItem(e.product_id) }}><BsTrash /></Button>
                             </div>
                         </Card>
                     ))}
