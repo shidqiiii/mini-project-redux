@@ -11,7 +11,15 @@ const initState = [{
 export const cartReducer = (state = initState, action) => {
     switch (action.type) {
         case "ADD":
-            return [...state, action.payload];
+            const existingIndex = state.findIndex((item) => item.product_id === action.payload.product_id);
+
+            if (existingIndex >= 0) {
+                state[existingIndex].total_item += 1;
+                return [...state]
+            }
+            else {
+                return [...state, action.payload];
+            }
         case "DELETE":
             return (state = state.filter((e) => e.product_id !== action.payload));
         case "AMOUNT":
