@@ -25,7 +25,7 @@ class ProductCard extends Component {
                                 <Card.Title>IDR {e.price.toLocaleString("id-ID")}</Card.Title>
                                 <Card.Text>{e.name}</Card.Text>
                                 <div className="button mt-auto">
-                                    <Button variant="dark" onClick={() => { this.addChart(e.id, e.price) }}>Add to Cart</Button>
+                                    <Button variant="dark" onClick={() => { this.addChart(e.id, e.price); }}>Add to Cart</Button>
                                 </div>
                             </Card.Body>
                         </Card>

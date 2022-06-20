@@ -4,6 +4,7 @@ import { BsTrash } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { deleteCart, amountItem } from '../redux/action/cartAction'
+import { toast, ToastContainer } from 'react-toastify';
 
 function ShoppingCartPage(props) {
     const [listCart, setlistCart] = useState([]);
