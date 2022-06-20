@@ -7,3 +7,8 @@ export const deleteCart = value => ({
     type: "DELETE",
     payload: value
 });
+
+export const amountItem = value => ({
+    type: "AMOUNT",
+    payload: value
+});

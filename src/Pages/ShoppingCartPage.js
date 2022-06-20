@@ -1,13 +1,14 @@
 import { React, useState, useEffect } from 'react'
 import { Card, Button, Container, Image } from 'react-bootstrap';
 import { connect } from "react-redux";
-import { deleteCart } from '../redux/action/cartAction'
+import { deleteCart, amountItem } from '../redux/action/cartAction'
 
 function ShoppingCartPage(props) {
     const [listCart, setlistCart] = useState([]);
+
     const dataJoin = () => {
         let newData = [];
-        props.cartReducer.map(item => {
+        props.cartReducer.map(item => (
             props.productReducer.map((e) => {
                 if (item.product_id === e.id) {
                     let data = {
@@ -22,7 +23,7 @@ function ShoppingCartPage(props) {
                     // console.log(data);
                 }
             })
-        })
+        ))
         setlistCart(newData);
         console.log(newData);
     }
@@ -30,6 +31,28 @@ function ShoppingCartPage(props) {
     useEffect(() => {
         dataJoin();
     }, [props.cartReducer]);
+
+    const [newarray, setnewarray] = useState([]);
+
+    const handleMuchItem = (id, type) => {
+        let findIndex = props.cartReducer.findIndex((e => e.product_id === id));
+        let item = props.cartReducer[findIndex].total_item;
+        if (item > 0) {
+            if (type === "add") {
+                item = item + 1
+            }
+            else if (type === "subtract") {
+                item = item - 1
+            }
+        }
+        props.cartReducer[findIndex].total_item = item
+        console.log(props.cartReducer);
+        props.dispatch(amountItem(props.cartReducer))
+    }
+
+    const deleteItem = (id) => {
+        props.dispatch(deleteCart(id))
+    }
 
     return (
         <Container className='mt-5'>
@@ -46,12 +69,12 @@ function ShoppingCartPage(props) {
                             </Card.Body>
                         </div>
                         <div className="col-md-3 d-flex align-items-center justify-content-center">
-                            <Button variant='dark'>-</Button>
+                            <Button variant='dark' onClick={() => { handleMuchItem(e.product_id, "subtract") }}>-</Button>
                             <Card.Text className='my-auto mx-3'>{e.total_item}</Card.Text>
-                            <Button variant='dark'>+</Button>
+                            <Button variant='dark' onClick={() => { handleMuchItem(e.product_id, "add") }}>+</Button>
                             <Card.Text className='my-auto mx-3'>IDR {e.total_price.toLocaleString("id-ID")}</Card.Text>
                         </div>
-                        <Button variant='dark' className='ms-auto mb-3' style={{ width: "100px" }} onClick={() => { props.dispatch(deleteCart(e.product_id)) }}>Hapus</Button>
+                        <Button variant='dark' className='ms-auto mb-3' style={{ width: "100px" }} onClick={() => { deleteItem(e.product_id) }}>Hapus</Button>
                     </div>
                 </Card>
             ))}
@@ -63,5 +86,6 @@ const mapStateToProps = state => ({
     cartReducer: state.cartReducer,
     productReducer: state.productReducer
 });
+
 
 export default connect(mapStateToProps)(ShoppingCartPage);
