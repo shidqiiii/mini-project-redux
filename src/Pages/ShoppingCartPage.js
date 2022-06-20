@@ -32,22 +32,8 @@ function ShoppingCartPage(props) {
         dataJoin();
     }, [props.cartReducer]);
 
-    const [newarray, setnewarray] = useState([]);
-
-    const handleMuchItem = (id, type) => {
-        let findIndex = props.cartReducer.findIndex((e => e.product_id === id));
-        let item = props.cartReducer[findIndex].total_item;
-        if (item > 0) {
-            if (type === "add") {
-                item = item + 1
-            }
-            else if (type === "subtract") {
-                item = item - 1
-            }
-        }
-        props.cartReducer[findIndex].total_item = item
-        console.log(props.cartReducer);
-        props.dispatch(amountItem(props.cartReducer))
+    const AmountItem = (id, type) => {
+        props.dispatch(amountItem([id, type]))
     }
 
     const deleteItem = (id) => {
@@ -69,9 +55,9 @@ function ShoppingCartPage(props) {
                             </Card.Body>
                         </div>
                         <div className="col-md-3 d-flex align-items-center justify-content-center">
-                            <Button variant='dark' onClick={() => { handleMuchItem(e.product_id, "subtract") }}>-</Button>
+                            <Button variant='dark' onClick={() => { AmountItem(e.product_id, "subs") }}>-</Button>
                             <Card.Text className='my-auto mx-3'>{e.total_item}</Card.Text>
-                            <Button variant='dark' onClick={() => { handleMuchItem(e.product_id, "add") }}>+</Button>
+                            <Button variant='dark' onClick={() => { AmountItem(e.product_id, "add") }}>+</Button>
                             <Card.Text className='my-auto mx-3'>IDR {e.total_price.toLocaleString("id-ID")}</Card.Text>
                         </div>
                         <Button variant='dark' className='ms-auto mb-3' style={{ width: "100px" }} onClick={() => { deleteItem(e.product_id) }}>Hapus</Button>
